@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".ITRProcess.DocumentUploadActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <LinearLayout
+                android:id="@+id/start_filing_financial_year"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/twenty"
+                android:layout_marginEnd="@dimen/twenty"
+
+                android:orientation="vertical"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <RelativeLayout
+                    android:background="@drawable/btn_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/five"
+                    android:layout_marginTop="@dimen/ten">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Form 16 (1st)"
+                        android:textSize="@dimen/text_size_sixteen"
+                        android:textColor="@color/lighter_black"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp">
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/img_from16_a"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:text="Upload Form 16"
+                        android:background="@drawable/ic_upload_image"
+                        >
+
+
+                    </ImageView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:background="@drawable/btn_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/five"
+                    android:layout_marginTop="@dimen/ten">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Form 16 (2nd)"
+                        android:textSize="@dimen/text_size_sixteen"
+                        android:paddingLeft="5dp"
+                        android:textColor="@color/lighter_black"
+                        android:layout_centerVertical="true">
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/img_from16_b"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:text="Upload Form 16"
+                        android:background="@drawable/ic_upload_image"
+                        >
+
+
+                    </ImageView>
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:background="@drawable/btn_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/five"
+                    android:layout_marginTop="@dimen/ten">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aadhar Card"
+                        android:paddingLeft="5dp"
+                        android:textSize="@dimen/text_size_sixteen"
+                        android:textColor="@color/lighter_black"
+                        android:layout_centerVertical="true">
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/img_aadhar_card"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/ic_upload_image"
+                        >
+
+
+                    </ImageView>
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:background="@drawable/btn_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/five"
+                    android:layout_marginTop="@dimen/ten">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PAN"
+                        android:textSize="@dimen/text_size_sixteen"
+                        android:paddingLeft="5dp"
+                        android:textColor="@color/lighter_black"
+                        android:layout_centerVertical="true">
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/img_pan"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/ic_upload_image"
+                        >
+
+
+                    </ImageView>
+                </RelativeLayout>
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ten"
+                    android:background="@drawable/btn_background"
+                    android:padding="@dimen/five">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Other Documents"
+                        android:textSize="@dimen/text_size_sixteen"
+                        android:paddingLeft="5dp"
+                        android:textColor="@color/lighter_black"
+                        android:layout_centerVertical="true">
+
+                    </TextView>
+
+                    <ImageView
+                        android:id="@+id/img_other_doc"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/ic_upload_image"
+                        >
+
+
+                    </ImageView>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/cont_button"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/forty"
+                android:layout_marginStart="@dimen/fifteen"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/fifteen"
+                android:layout_marginBottom="@dimen/ten"
+                android:text="@string/cont"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_sixteen"
+                android:background="@drawable/btn_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

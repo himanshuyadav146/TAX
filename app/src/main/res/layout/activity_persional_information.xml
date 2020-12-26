@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    tools:context=".ITRProcess.PersionalInformationActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:id="@+id/llProfileContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Name as per PAN Card"
+                    android:textColor="@color/text_color"/>
+
+                <EditText
+                    android:id="@+id/editFName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_border"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@drawable/ic__account"
+                    android:paddingLeft="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/text_color"
+                    >
+
+                </EditText>
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Middle Name as per PAN Card"
+                    android:textColor="@color/text_color"
+                    android:layout_marginTop="@dimen/ten"/>
+
+                <EditText
+                    android:id="@+id/editMName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_border"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@drawable/ic__account"
+                    android:paddingLeft="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/text_color"
+                    >
+
+                </EditText>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last Name as per PAN Card"
+                    android:textColor="@color/text_color"
+                    android:layout_marginTop="@dimen/ten"/>
+
+                <EditText
+                    android:id="@+id/editLName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_border"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@drawable/ic__account"
+                    android:paddingLeft="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/text_color"
+                    >
+
+                </EditText>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile No"
+                    android:textColor="@color/text_color"
+                    android:layout_marginTop="@dimen/ten"/>
+
+                <EditText
+                    android:id="@+id/editMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_border"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@drawable/ic__account"
+                    android:paddingLeft="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/text_color"
+                    android:inputType="number"
+                    >
+
+                </EditText>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-Mail ID"
+                    android:textColor="@color/text_color"
+                    android:layout_marginTop="@dimen/ten"/>
+
+                <EditText
+                    android:id="@+id/editLEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_border"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@drawable/ic__account"
+                    android:paddingLeft="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/text_color"
+                    android:inputType="textEmailAddress"
+                    >
+
+                </EditText>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DOB"
+                    android:textColor="@color/text_color"
+                    android:layout_marginTop="@dimen/ten"/>
+
+                <EditText
+                    android:id="@+id/editDOB"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_border"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@drawable/ic__account"
+                    android:paddingLeft="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/text_color"
+                    >
+
+                </EditText>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PAN"
+                    android:textColor="@color/text_color"
+                    android:layout_marginTop="@dimen/ten"/>
+
+                <EditText
+                    android:id="@+id/editPAN"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_border"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@drawable/ic__account"
+                    android:paddingLeft="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/text_color"
+                    >
+
+                </EditText>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aadhar Card"
+                    android:textColor="@color/text_color"
+                    android:layout_marginTop="@dimen/ten"/>
+
+                <EditText
+                    android:id="@+id/editAadhar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/text_border"
+                    android:layout_marginTop="5dp"
+                    android:drawableLeft="@drawable/ic__account"
+                    android:paddingLeft="10dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/text_color"
+                    >
+
+                </EditText>
+
+
+                <Button
+                    android:id="@+id/cont_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/forty"
+                    android:layout_marginStart="@dimen/fifteen"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="@dimen/fifteen"
+                    android:layout_marginBottom="@dimen/ten"
+                    android:background="@drawable/btn_background"
+                    android:text="@string/cont"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_fourteen"
+                    android:layout_gravity="bottom"
+
+                    />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

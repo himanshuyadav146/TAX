@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ITRProcess.OtherSourceIncomeActivity">
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fifteen"
+        app:layout_constraintTop_toBottomOf="@+id/tab_view"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/thirty"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/thirty"
+        android:id="@+id/linearLayout22">
+
+        <TextView
+            android:text="@string/other_income_int_inc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView34"
+            android:textColor="@color/lighter_black"
+            android:textSize="@dimen/text_size_twelve"
+            android:layout_marginTop="@dimen/five"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/interestIncomeField"
+            android:background="@drawable/text_field"
+            android:padding="@dimen/twelve"
+            android:textSize="@dimen/text_size_twelve"
+            android:textColor="@color/lighter_black"/>
+
+        <TextView
+            android:text="@string/other_income_int_inc_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView35"
+            android:textSize="11sp"
+            android:textColor="@color/grey"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/thirty"
+        android:layout_marginEnd="@dimen/thirty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout22"
+        android:layout_marginTop="@dimen/fifteen"
+        android:id="@+id/linearLayout23">
+
+        <TextView
+            android:text="@string/other_income_int_fd_rd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView36"
+            android:textColor="@color/lighter_black"
+            android:textSize="@dimen/text_size_twelve"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/forty"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/interestOnRdFdField"
+            android:textColor="@color/lighter_black"
+            android:textSize="@dimen/text_size_twelve"
+            android:padding="@dimen/twelve"
+            android:background="@drawable/text_field"/>
+
+        <TextView
+            android:text="@string/other_income_int_fd_rd_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView37"
+            android:textColor="@color/grey"
+            android:textSize="11sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fifteen"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout23"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/thirty"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/thirty"
+        android:id="@+id/linearLayout24">
+
+        <TextView
+            android:text="@string/other_income_any_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView38"
+            android:textColor="@color/lighter_black"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_twelve"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/anyOtherIncomeField"
+            android:textColor="@color/lighter_black"
+            android:textSize="@dimen/text_size_twelve"
+            android:padding="@dimen/text_size_twelve"
+            android:background="@drawable/text_field"/>
+
+        <TextView
+            android:text="@string/other_income_any_other_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView39"
+            android:textColor="@color/grey"
+            android:textSize="11sp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:text="@string/cont"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/forty"
+        android:id="@+id/cont_button"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/fifteen"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/fifteen"
+        android:layout_marginBottom="@dimen/ten"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_fourteen" android:layout_marginTop="@dimen/ten"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout24"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
