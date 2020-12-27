@@ -19,7 +19,7 @@ class PersionalInformationActivity : AppCompatActivity() {
         cont_button.setOnClickListener(View.OnClickListener {
 
           //  setDataIntoModel()
-            intent = Intent(applicationContext, DocumentUploadActivity::class.java)
+            intent = Intent(applicationContext, AddressDetailsActivity::class.java)
            // objApiLogin.Test="himanshu new test"
             startActivity(intent)
         })

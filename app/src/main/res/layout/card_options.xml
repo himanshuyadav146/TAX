@@ -49,12 +49,15 @@
         android:layout_marginEnd="@dimen/fifteen"
         android:layout_marginBottom="@dimen/twenty"
         android:gravity="center"
-        android:textSize="@dimen/text_size_fourteen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/income_cource_imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/income_cource_imageView"
+        android:textColor="@color/black"
+        android:layout_gravity="bottom"
+        android:textSize="@dimen/text_size_fourteen"
+        android:fontFamily="@font/roboto_bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

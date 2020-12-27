@@ -60,34 +60,34 @@ class DocumentUploadActivity : AppCompatActivity() {
             startActivity(intent)
         })
 
-        img_from16_a.setOnClickListener(View.OnClickListener {
-            mForm16a=true
-            uploadDiloag()
-        })
-
-        img_from16_b.setOnClickListener(View.OnClickListener {
-            mForm16b=true
-            uploadDiloag()
-        })
-
-
-        img_aadhar_card.setOnClickListener(View.OnClickListener {
-            mAadhar=true
-            uploadDiloag()
-        })
-
-
-
-        img_pan.setOnClickListener(View.OnClickListener {
-            mPan=true
-            uploadDiloag()
-        })
-
-
-        img_other_doc.setOnClickListener(View.OnClickListener {
-            mOtherDoc=true
-            uploadDiloag()
-        })
+//        img_from16_a.setOnClickListener(View.OnClickListener {
+//            mForm16a=true
+//            uploadDiloag()
+//        })
+//
+//        img_from16_b.setOnClickListener(View.OnClickListener {
+//            mForm16b=true
+//            uploadDiloag()
+//        })
+//
+//
+//        img_aadhar_card.setOnClickListener(View.OnClickListener {
+//            mAadhar=true
+//            uploadDiloag()
+//        })
+//
+//
+//
+//        img_pan.setOnClickListener(View.OnClickListener {
+//            mPan=true
+//            uploadDiloag()
+//        })
+//
+//
+//        img_other_doc.setOnClickListener(View.OnClickListener {
+//            mOtherDoc=true
+//            uploadDiloag()
+//        })
     }
 
 

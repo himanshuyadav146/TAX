@@ -39,11 +39,14 @@
     <color name="refer_banner_bg">#293c4a</color>
     <color name="shadow_grey">#29EFEFEF</color>
     <color name="text_color">#A4A4A4</color>
+    <color name="text_edit_color">#E9E9EB</color>
 
     <!-- dots inactive colors -->
     <color name="intro_bullet_inactive">#4000B894</color>
     <!-- dots active colors -->
     <color name="intro_bullet_active">#00B894</color>
+    <color name="text_blue">#67759A</color>
+    <color name="blue_bg">#5874C6</color>
 
     <array name="array_intro_bullet_inactive">
         <item>@color/intro_bullet_inactive</item>
