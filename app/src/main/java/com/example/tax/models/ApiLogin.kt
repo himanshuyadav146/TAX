@@ -17,6 +17,11 @@ class ApiLogin : Serializable{
     @SerializedName("Email")
     @Expose
     var email: String? = null
+
+    @SerializedName("EmailAddress")
+    @Expose
+    var EmailAddress: String? = null
+
     @SerializedName("MobileNo")
     @Expose
     var mobileNo: String? = null
@@ -38,6 +43,33 @@ class ApiLogin : Serializable{
     @SerializedName("Test")
     @Expose
     var Test: String? = null
+
+
+    @SerializedName("data")
+    @Expose
+    var data: Data? = null
+    @SerializedName("message")
+    @Expose
+    var message: String? = null
+    @SerializedName("status")
+    @Expose
+    var status: String? = null
+
+    @SerializedName("MobileNumber")
+    @Expose
+    var MobileNumber: String? = null
+
+    @SerializedName("IpAddress")
+    @Expose
+    var IpAddress: String? = null
+
+    @SerializedName("FirebaseId")
+    @Expose
+    var FirebaseId: String? = null
+
+    @SerializedName("DeviceType")
+    @Expose
+    var DeviceType: String? = null
 
 
     //////////////////////////////////////////////////////////////////

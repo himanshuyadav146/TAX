@@ -11,7 +11,8 @@ import okhttp3.OkHttpClient
 
 
 class APIClient {
-    var BaseUrl = "http://mytxapi.techedgeinfo.com/"          //Testing
+   // var BaseUrl = "http://mytxapi.techedgeinfo.com/"          //Testing
+    var BaseUrl = "http://sh017.hostgator.tempwebhost.net/~easytxi6/"          //Testing
 
     fun getClient(): Retrofit{
         val interceptor = HttpLoggingInterceptor()

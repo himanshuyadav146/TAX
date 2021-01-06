@@ -3,6 +3,7 @@ package com.example.tax.Interfaces
 import com.example.tax.models.ApiLogin
 import com.example.tax.models.Data
 import com.example.tax.models.LoginModel
+import com.example.tax.models.RegistrationModel
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -11,20 +12,12 @@ import retrofit2.http.*
 
 interface API_Interface {
 
-    @POST("/api/customer/login")
+ //   http://sh017.hostgator.tempwebhost.net/~easytxi6/api/v1/login
+    @POST("api/v1/login")
     fun postLogin(@Body objApiLogin : ApiLogin): Call<LoginModel>
 
-    @POST("/api/customer/Registration")
-    fun postRegistration(@Body objApiLogin : ApiLogin): Call<LoginModel>
-
-
-
-//    (@Part("Form16Url")Form16Url: MultipartBody.Part,
-//    @Part("Form16Url2") Form16Url2: MultipartBody.Part,
-//    @Part("PanUrl") PanUrl: MultipartBody.Part,
-//    @Part("AdhaarUrl") AdhaarUrl: MultipartBody.Part,
-//    @Part("OtherDocUrl") OtherDocUrl: MultipartBody.Part,
-
+    @POST("api/v1/registration")
+    fun postRegistration(@Body objApiLogin : ApiLogin): Call<RegistrationModel>
 
     @Headers("Content-Type:multipart/form-data")
     @Multipart

@@ -3,10 +3,10 @@ package com.example.tax.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class LoginModel {
+class RegistrationModel {
     @SerializedName("data")
     @Expose
-    var data: Data? = null
+    var data: String? = null
 
     @SerializedName("status")
     @Expose

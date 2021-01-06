@@ -31,29 +31,6 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_f_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:hint="First Name">
-
-                </com.google.android.material.textfield.TextInputEditText>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_l_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:hint="Last Name">
-
-                </com.google.android.material.textfield.TextInputEditText>
-
-
-
-                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

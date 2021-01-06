@@ -43,14 +43,14 @@ class LoginActivity : AppCompatActivity() {
             if(txt_email.text.isNullOrEmpty() && txt_pwd.text.isNullOrEmpty()){
                 toast("Please Enter Mandatory Fields")
             }else{
-                objApiLogin.userId=txt_email.text.toString()
+                objApiLogin.EmailAddress=txt_email.text.toString()
                 objApiLogin.Password=txt_pwd.text.toString()
-//                postLogin()
+                postLogin()
 
-                intent = Intent(applicationContext, DashBoardActivity::class.java)
-                toast("Successfully Login")
-                startActivity(intent)
-                finish()
+//                intent = Intent(applicationContext, DashBoardActivity::class.java)
+//                toast("Successfully Login")
+//                startActivity(intent)
+//                finish()
             }
 
         })
@@ -61,11 +61,6 @@ class LoginActivity : AppCompatActivity() {
             finish()
         })
 
-
-//        tv_not_register.setOnClickListener { View.OnClickListener{
-//            intent = Intent(applicationContext, SignUpActivity::class.java)
-//            startActivity(intent)
-//        } }
     }
 
 
@@ -80,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
                 dialog.hideDialog()
                 toast("Please Try Again")
             }
-
             override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
                 if(response.isSuccessful){
                     dialog.hideDialog()
