@@ -4,22 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
+    android:background="@color/colorWhite"
     tools:context=".ITRProcess.PersionalInformationActivity">
+
+    <include
+        android:layout_width="0dp"
+        android:layout_height="@dimen/fifty"
+        layout="@layout/app_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toolbar"/>
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
-        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="@dimen/five"
+        android:fillViewport="true">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/ten"
+            android:layout_marginRight="@dimen/ten"
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:id="@+id/llProfileContainer"
@@ -31,22 +43,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/roboto_light"
                     android:text="First Name as per PAN Card"
-                    android:textColor="@color/light_black"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
                 <EditText
                     android:id="@+id/editFName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/forty"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_border"
                     android:drawableLeft="@drawable/ic__account"
-                    android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto"
-                    android:padding="@dimen/ten"
+                    android:paddingLeft="@dimen/ten"
+                    android:drawablePadding="10dp"
                     android:textColor="@color/light_black"
+                    android:singleLine="true"
                     android:textSize="@dimen/text_size_fourteen">
 
                 </EditText>
@@ -56,15 +69,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ten"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/roboto_light"
                     android:text="Middle Name as per PAN Card"
-                    android:textColor="@color/light_black"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
                 <EditText
                     android:id="@+id/editMName"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/forty"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_border"
                     android:drawableLeft="@drawable/ic__account"
@@ -72,6 +85,7 @@
                     android:fontFamily="@font/roboto"
                     android:paddingLeft="10dp"
                     android:textColor="@color/light_black"
+                    android:singleLine="true"
                     android:textSize="@dimen/text_size_fourteen">
 
                 </EditText>
@@ -81,15 +95,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ten"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/roboto_light"
                     android:text="Last Name as per PAN Card"
-                    android:textColor="@color/light_black"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
                 <EditText
                     android:id="@+id/editLName"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/forty"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_border"
                     android:drawableLeft="@drawable/ic__account"
@@ -97,6 +111,7 @@
                     android:fontFamily="@font/roboto"
                     android:paddingLeft="10dp"
                     android:textColor="@color/light_black"
+                    android:singleLine="true"
                     android:textSize="@dimen/text_size_fourteen">
 
                 </EditText>
@@ -106,15 +121,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ten"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/roboto_light"
                     android:text="Mobile No"
-                    android:textColor="@color/light_black"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
                 <EditText
                     android:id="@+id/editMobile"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/forty"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_border"
                     android:drawableLeft="@drawable/ic__account"
@@ -122,6 +137,7 @@
                     android:fontFamily="@font/roboto"
                     android:inputType="number"
                     android:paddingLeft="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/text_size_fourteen">
 
@@ -132,15 +148,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ten"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/roboto_light"
                     android:text="E-Mail ID"
-                    android:textColor="@color/light_black"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
                 <EditText
                     android:id="@+id/editLEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/forty"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_border"
                     android:drawableLeft="@drawable/ic__account"
@@ -148,6 +164,7 @@
                     android:fontFamily="@font/roboto"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/text_size_fourteen">
 
@@ -158,21 +175,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ten"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/roboto_light"
                     android:text="DOB"
-                    android:textColor="@color/light_black"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
                 <EditText
                     android:id="@+id/editDOB"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/forty"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/text_border"
                     android:drawableLeft="@drawable/ic__account"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/roboto"
                     android:paddingLeft="10dp"
+                    android:singleLine="true"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/text_size_fourteen">
 
@@ -186,25 +204,24 @@
 
                     <Button
                         android:id="@+id/cont_button"
-                        android:layout_width="match_parent"
+                        android:layout_width="200dp"
                         android:layout_height="@dimen/forty"
                         android:layout_gravity="bottom"
-                        android:layout_marginStart="@dimen/fifteen"
                         android:layout_marginTop="20dp"
-                        android:layout_marginEnd="@dimen/fifteen"
                         android:layout_marginBottom="@dimen/ten"
                         android:background="@drawable/btn_background"
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/cont"
                         android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_fourteen" />
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:layout_centerHorizontal="true"/>
                 </RelativeLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
-
     </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
