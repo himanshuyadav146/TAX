@@ -19,7 +19,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/rl_btnContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_light"
-                    android:text="First Name as per PAN Card"
+                    android:text="First Name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
@@ -60,7 +60,8 @@
                     android:drawablePadding="10dp"
                     android:textColor="@color/light_black"
                     android:singleLine="true"
-                    android:textSize="@dimen/text_size_fourteen">
+                    android:textSize="@dimen/text_size_fourteen"
+                    android:hint="First Name as per PAN Card">
 
                 </EditText>
 
@@ -70,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ten"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Middle Name as per PAN Card"
+                    android:text="Middle Name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
@@ -86,7 +87,8 @@
                     android:paddingLeft="10dp"
                     android:textColor="@color/light_black"
                     android:singleLine="true"
-                    android:textSize="@dimen/text_size_fourteen">
+                    android:textSize="@dimen/text_size_fourteen"
+                    android:hint="Middle Name as per PAN Card">
 
                 </EditText>
 
@@ -96,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/ten"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Last Name as per PAN Card"
+                    android:text="Last Name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen" />
 
@@ -112,36 +114,88 @@
                     android:paddingLeft="10dp"
                     android:textColor="@color/light_black"
                     android:singleLine="true"
-                    android:textSize="@dimen/text_size_fourteen">
+                    android:textSize="@dimen/text_size_fourteen"
+                    android:hint="Last Name as per PAN Card">
 
                 </EditText>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/ten">
 
-                <TextView
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/ten"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Mobile No"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_fourteen" />
+                    android:layout_marginRight="@dimen/five"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editMobile"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/forty"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/text_border"
-                    android:drawableLeft="@drawable/ic__account"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/roboto"
-                    android:inputType="number"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/text_size_fourteen">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Mobile No"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_fourteen" />
 
-                </EditText>
+                    <EditText
+                        android:id="@+id/editMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/text_border"
+                        android:drawableLeft="@drawable/ic__account"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/roboto"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:hint="Mobile No">
+
+                    </EditText>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/five"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="DOB"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_fourteen" />
+
+                    <EditText
+                        android:id="@+id/editDOB"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/text_border"
+                        android:drawableRight="@drawable/ic_cal"
+                        android:fontFamily="@font/roboto"
+                        android:paddingRight="10dp"
+                        android:padding="@dimen/ten"
+                        android:singleLine="true"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:hint="DOB">
+
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+
 
 
                 <TextView
@@ -166,62 +220,116 @@
                     android:paddingLeft="10dp"
                     android:singleLine="true"
                     android:textColor="@color/light_black"
-                    android:textSize="@dimen/text_size_fourteen">
+                    android:textSize="@dimen/text_size_fourteen"
+                    android:hint="E-Mail ID">
 
                 </EditText>
 
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/ten"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="DOB"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_fourteen" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/ten">
 
-                <EditText
-                    android:id="@+id/editDOB"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/forty"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/text_border"
-                    android:drawableLeft="@drawable/ic__account"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/roboto"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/text_size_fourteen">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/five"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                </EditText>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="PAN Card No"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/text_size_fourteen" />
+
+                        <EditText
+                            android:id="@+id/editPAN"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/forty"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/text_border"
+                            android:drawableLeft="@drawable/ic__account"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/roboto"
+                            android:paddingLeft="10dp"
+                            android:textColor="@color/light_black"
+                            android:singleLine="true"
+                            android:textSize="@dimen/text_size_fourteen"
+                            android:hint="PAN Card No">
+
+                        </EditText>
+                    </LinearLayout>
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/five"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/cont_button"
-                        android:layout_width="200dp"
-                        android:layout_height="@dimen/forty"
-                        android:layout_gravity="bottom"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="@dimen/ten"
-                        android:background="@drawable/btn_background"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/cont"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/text_size_fourteen"
-                        android:layout_centerHorizontal="true"/>
-                </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Aadhar Card No"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/text_size_fourteen" />
+
+                        <EditText
+                            android:id="@+id/editAadhar"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/forty"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/text_border"
+                            android:drawableLeft="@drawable/ic__account"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/roboto"
+                            android:paddingLeft="10dp"
+                            android:textSize="@dimen/text_size_fourteen"
+                            android:textColor="@color/light_black"
+                            android:singleLine="true"
+                            android:hint="Aadhar Card No">
+
+                        </EditText>
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
     </ScrollView>
 
+    <RelativeLayout
+        android:id="@+id/rl_btnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/cont_button"
+            android:layout_width="200dp"
+            android:layout_height="@dimen/forty"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/fifteen"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/fifteen"
+            android:layout_marginBottom="@dimen/ten"
+            android:background="@drawable/btn_background"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/cont"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_fourteen" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,14 +7,24 @@
     android:background="@color/colorWhite"
     tools:context=".ITRProcess.DocumentUploadActivity">
 
+    <include
+        android:layout_width="0dp"
+        android:layout_height="@dimen/fifty"
+        layout="@layout/app_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toolbar"/>
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/rl_btnContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="@dimen/five"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,29 +49,35 @@
                 </include>
 
             </LinearLayout>
-
-
-
-            <Button
-                android:id="@+id/cont_button"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/forty"
-                android:layout_marginStart="@dimen/fifteen"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="@dimen/fifteen"
-                android:layout_marginBottom="@dimen/ten"
-                android:text="@string/cont"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_sixteen"
-                android:background="@drawable/btn_background"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_btnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/cont_button"
+            android:layout_width="200dp"
+            android:layout_height="@dimen/forty"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/fifteen"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/fifteen"
+            android:layout_marginBottom="@dimen/ten"
+            android:background="@drawable/btn_background"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/cont"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_fourteen" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

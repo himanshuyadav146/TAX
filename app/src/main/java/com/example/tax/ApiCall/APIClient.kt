@@ -27,14 +27,6 @@ class APIClient {
             .build()
 
 
-//        val httpClient = OkHttpClient.Builder()
-//            .connectTimeout(15.toLong(), TimeUnit.MILLISECONDS)
-//            .writeTimeout(DEFAULT_WRITE_TIMEOUT, TimeUnit.MILLISECONDS)
-//            .readTimeout(DEFAULT_READ_TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-//            .addInterceptor(timeoutInterceptor)
-//            .build()
-
-
         val retrofit = Retrofit.Builder()
             .baseUrl(BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())

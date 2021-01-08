@@ -23,7 +23,9 @@
         <activity android:name=".ITRProcess.OtherSourceIncomeActivity" />
         <activity android:name=".ITRProcess.BankDetailsActivity" />
         <activity android:name=".ITRProcess.DocumentUploadActivity" />
-        <activity android:name=".ITRProcess.PersionalInformationActivity" />
+        <activity android:name=".ITRProcess.PersionalInformationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ITRProcess.ChooseITRTypeActivity" />
         <activity android:name=".authentication.ui.LoginActivity" />
         <activity android:name=".authentication.ui.SignUpActivity" />
