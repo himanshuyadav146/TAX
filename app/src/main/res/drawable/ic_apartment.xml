@@ -1,0 +1,66 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+  <path
+      android:pathData="M24,6h18v12h-18z"
+      android:fillColor="#6D4C41"/>
+  <path
+      android:pathData="M33,7l-9,10v25h18V17L33,7z"
+      android:fillColor="#F4511E"/>
+  <path
+      android:pathData="M33,14m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"
+      android:fillColor="#BF360C"/>
+  <path
+      android:pathData="M6,6h18v12h-18z"
+      android:fillColor="#4E342E"/>
+  <path
+      android:pathData="M15,7L6,17v25h18V17L15,7z"
+      android:fillColor="#BF360C"/>
+  <path
+      android:pathData="M15,14m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"
+      android:fillColor="#6D4C41"/>
+  <path
+      android:pathData="M35,35h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M35,19h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M35,27h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M27,19h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M27,27h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M27,35h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M33,14m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M17,35h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M17,19h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M17,27h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M9,19h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M9,27h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M9,35h4v4h-4z"
+      android:fillColor="#FFC107"/>
+  <path
+      android:pathData="M15,14m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"
+      android:fillColor="#FFC107"/>
+</vector>

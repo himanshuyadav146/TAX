@@ -34,16 +34,16 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
         mContext = this
         apI_Interface = APIClient().getClient().create(API_Interface::class.java)
-        appPreferences=AppPreferences(mContext)
+        appPreferences = AppPreferences(mContext)
 
         btn_signup.setOnClickListener(View.OnClickListener {
-            if(txt_email.text.isNullOrEmpty() && txt_pwd.text.isNullOrEmpty()  && txt_mob.text.isNullOrEmpty()){
+            if (txt_email.text.isNullOrEmpty() && txt_pwd.text.isNullOrEmpty() && txt_mob.text.isNullOrEmpty()) {
                 toast("Please Enter Mandatory Fields")
-            }else{
-                objApiLogin.EmailAddress=txt_email.text.toString()
-                objApiLogin.MobileNumber=txt_mob.text.toString()
-                objApiLogin.Password=txt_pwd.text.toString()
-                objApiLogin.DeviceType="Android"
+            } else {
+                objApiLogin.EmailAddress = txt_email.text.toString()
+                objApiLogin.MobileNumber = txt_mob.text.toString()
+                objApiLogin.Password = txt_pwd.text.toString()
+                objApiLogin.DeviceType = "Android"
                 postRegistration()
             }
         })
@@ -54,19 +54,27 @@ class SignUpActivity : AppCompatActivity() {
             finish()
         })
     }
+
     private fun postRegistration() {
-        var dialog = AlertDialogueManager(mContext,"Please Wait")
+        var dialog = AlertDialogueManager(mContext, "Please Wait")
         val call = apI_Interface.postRegistration(objApiLogin)
         call.enqueue(object : Callback<RegistrationModel> {
             override fun onFailure(call: Call<RegistrationModel>, t: Throwable) {
                 dialog.hideDialog()
                 toast("Please Try Again")
             }
-            override fun onResponse(call: Call<RegistrationModel>, response: Response<RegistrationModel>) {
-                if(response.isSuccessful){
+
+            override fun onResponse(
+                call: Call<RegistrationModel>,
+                response: Response<RegistrationModel>
+            ) {
+                if (response.isSuccessful) {
                     dialog.hideDialog()
-                    if(response.body()?.status.equals("200")){
+                    if (response.body()?.status.equals("200")) {
                         toast(response.body()?.message.toString())
+                        intent = Intent(applicationContext, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
                 }
             }
