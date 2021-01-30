@@ -8,16 +8,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tax.R
+import com.example.tax.models.ItrBaseModel
 import dell.com.allindiaitr.holders.SourceOfIncomeHolder
 import dell.com.allindiaitr.models.ITROption_Model
+import com.example.tax.models.SourceOfIncome as SourceOfIncome
 
 
-class SourceOfIncomeAdapter(): RecyclerView.Adapter<SourceOfIncomeHolder>() {
+class SourceOfIncomeAdapter() : RecyclerView.Adapter<SourceOfIncomeHolder>() {
 
     lateinit var mContext: Context
     lateinit var mModelList: List<ITROption_Model>
-//    var newItrBase = NewItrBase.instance
-
+    var itrBaseModel = ItrBaseModel.instance
+    var sourceOfIncome= SourceOfIncome()
     constructor(mContext: Context, mModelList: List<ITROption_Model>) : this() {
         this.mContext = mContext
         this.mModelList = mModelList
@@ -43,7 +45,9 @@ class SourceOfIncomeAdapter(): RecyclerView.Adapter<SourceOfIncomeHolder>() {
 //    }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): SourceOfIncomeHolder {
-        return SourceOfIncomeHolder(LayoutInflater.from(mContext).inflate(R.layout.card_options, p0, false))
+        return SourceOfIncomeHolder(
+            LayoutInflater.from(mContext).inflate(R.layout.card_options, p0, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -71,8 +75,7 @@ class SourceOfIncomeAdapter(): RecyclerView.Adapter<SourceOfIncomeHolder>() {
 //                p0.income_cource_imageView.setColorFilter(Color.parseColor("#FFFFFF"))
 //            }
             p0.income_source_textView.typeface = Typeface.DEFAULT_BOLD
-        }
-        else {
+        } else {
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                p0.income_source_textView.setTextColor(mContext.getColor(R.color.dark_grey))
 //                p0.card_options.setCardBackgroundColor(mContext.getColor(R.color.white))
@@ -86,7 +89,7 @@ class SourceOfIncomeAdapter(): RecyclerView.Adapter<SourceOfIncomeHolder>() {
         }
 
         p0.itemView.setOnClickListener {
-            mModelList[p1].isSelected= !mModelList[p1].isSelected
+            mModelList[p1].isSelected = !mModelList[p1].isSelected
             if (mModelList[p1].isSelected) {
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                    p0.income_source_textView.setTextColor(mContext.getColor(R.color.white))
@@ -98,8 +101,10 @@ class SourceOfIncomeAdapter(): RecyclerView.Adapter<SourceOfIncomeHolder>() {
 //                    p0.income_cource_imageView.setColorFilter(Color.parseColor("#FFFFFF"))
 //                }
                 p0.income_source_textView.typeface = Typeface.DEFAULT_BOLD
-            }
-            else {
+                itrBaseModel.getSourceOfIncome()?.setIsSalary(true)
+                mModelList[p1].text?.let { it1 -> setSelectionIncomeSource(it1,true) }
+                itrBaseModel.setSourceOfIncome(sourceOfIncome)
+            } else {
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                    p0.income_source_textView.setTextColor(mContext.getColor(R.color.dark_grey))
 //                    p0.card_options.setCardBackgroundColor(mContext.getColor(R.color.white))
@@ -110,7 +115,25 @@ class SourceOfIncomeAdapter(): RecyclerView.Adapter<SourceOfIncomeHolder>() {
 //                    p0.income_cource_imageView.setColorFilter(Color.parseColor("#777777"))
 //                }
                 p0.income_source_textView.typeface = Typeface.DEFAULT
+                mModelList[p1].text?.let { it1 -> setSelectionIncomeSource(it1,false) }
+                itrBaseModel.setSourceOfIncome(sourceOfIncome)
             }
         }
     }
+
+
+    private fun setSelectionIncomeSource(title: String, isSelect: Boolean) {
+        when (title) {
+            "Salary/Pension" -> sourceOfIncome.setIsSalary(isSelect)
+            "House Property" -> sourceOfIncome.setIsHouseProperty(isSelect)
+            "Business/Profession" -> sourceOfIncome.setIsBusiness(isSelect)
+            "Capital Gains" -> sourceOfIncome.setIsCapitalGain(isSelect)
+            "Other Sources" -> sourceOfIncome.setIsOtherSource(isSelect)
+            "Foreign Income" -> sourceOfIncome.setIsForeignIncome(isSelect)
+            else -> {
+
+            }
+        }
+    }
+
 }

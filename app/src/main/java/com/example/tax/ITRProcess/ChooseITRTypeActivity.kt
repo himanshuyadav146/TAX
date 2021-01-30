@@ -4,21 +4,30 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import com.example.tax.ApiCall.APIClient
 import com.example.tax.Interfaces.API_Interface
 import com.example.tax.R
+import com.example.tax.base.BaseActivity
+import com.example.tax.models.ItrBaseModel
 import com.example.tax.utils.AppPreferences
 import com.example.tax.utils.LinearSpacingDecoration
+import com.example.tax.utils.toast
+import com.google.gson.Gson
 import dell.com.allindiaitr.adapter.SourceOfIncomeAdapter
 import dell.com.allindiaitr.models.ITROption_Model
+import dell.com.allindiaitr.utils.AlertDialogueManager
 import kotlinx.android.synthetic.main.activity_choose_itrtype.*
+import retrofit2.Call
+import retrofit2.Response
 
 
-class ChooseITRTypeActivity : AppCompatActivity() {
+class ChooseITRTypeActivity : BaseActivity() {
 
     var itroptions = listOf<String>("Salary/Pension", "House Property", "Business/Profession",
         "Capital Gains", "Other Sources", "Foreign Income")
@@ -30,12 +39,12 @@ class ChooseITRTypeActivity : AppCompatActivity() {
     lateinit var mContext: Context
     private var appPreferences: AppPreferences? = null
     var mModelList = mutableListOf<ITROption_Model>()
+    var itrBaseModel = ItrBaseModel.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_choose_itrtype)
         mContext=this;
-//        recycler_view_list
+        apI_Interface = APIClient().getClient().create(API_Interface::class.java)
         recycler_view_list.setHasFixedSize(true)
         recycler_view_list.layoutManager = GridLayoutManager(mContext, 2) as RecyclerView.LayoutManager?
         recycler_view_list.adapter = SourceOfIncomeAdapter(this, getListData())
@@ -65,12 +74,25 @@ class ChooseITRTypeActivity : AppCompatActivity() {
 //        })
 
         cont_button.setOnClickListener(View.OnClickListener {
+
             intent = Intent(applicationContext, PersionalInformationActivity::class.java)
             startActivity(intent)
             finish()
         })
 
+        getInformation()
+    }
 
+    override fun getToolbarTitle(): String? {
+        return "Choose ITR Type"
+    }
+
+    override fun getTagName(): String? {
+        return "ITR"
+    }
+
+    override fun getLayoutResource(): Int {
+        return R.layout.activity_choose_itrtype
     }
 
     private fun getListData(): List<ITROption_Model> {
@@ -79,5 +101,30 @@ class ChooseITRTypeActivity : AppCompatActivity() {
             mModelList.add(ITROption_Model(itroptions[i], card_img[i]))
         }
         return mModelList
+    }
+
+    private fun getInformation(){
+        itrBaseModel.setType("PD")
+        itrBaseModel.setItrId("71387885-5d8a-11eb-8bb6-525400f438a7")
+        var dialog = AlertDialogueManager(mContext,"Please Wait")
+        val call = apI_Interface.getInformation(itrBaseModel)
+        Log.d("TEMP_TAG", "url: " + call.request().url.toString());
+        call.enqueue(object : retrofit2.Callback<ItrBaseModel> {
+            override fun onFailure(call: Call<ItrBaseModel>, t: Throwable) {
+                dialog.hideDialog()
+                toast("Please Try Again")
+            }
+            override fun onResponse(call: Call<ItrBaseModel>, response: Response<ItrBaseModel>) {
+                if(response.isSuccessful){
+                    dialog.hideDialog()
+                    var gson: Gson = Gson()
+                    var jsonObj:String=gson.toJson(response.body())
+                    itrBaseModel.setData(response.body()?.getData())
+//                    intent = Intent(applicationContext, AddressDetailsActivity::class.java)
+//                    startActivity(intent)
+                }
+            }
+
+        })
     }
 }

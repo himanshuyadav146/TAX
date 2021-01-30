@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import com.example.tax.ApiCall.APIClient
 import com.example.tax.DashBoard.DashBoardActivity
 import com.example.tax.Interfaces.API_Interface
@@ -29,12 +31,16 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var apI_Interface: API_Interface
     lateinit var mContext: Context
     lateinit var appPreferences: AppPreferences
+    lateinit var animation:Animation
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         mContext = this
         apI_Interface = APIClient().getClient().create(API_Interface::class.java)
         appPreferences = AppPreferences(mContext)
+
+        animation=AnimationUtils.loadAnimation(this,R.anim.uptodown)
+        rlayout.animation=animation
 
         btn_signup.setOnClickListener(View.OnClickListener {
             if (txt_email.text.isNullOrEmpty() && txt_pwd.text.isNullOrEmpty() && txt_mob.text.isNullOrEmpty()) {
@@ -48,11 +54,11 @@ class SignUpActivity : AppCompatActivity() {
             }
         })
 
-        tv_allready_register.setOnClickListener(View.OnClickListener {
-            intent = Intent(applicationContext, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        })
+//        tv_allready_register.setOnClickListener(View.OnClickListener {
+//            intent = Intent(applicationContext, LoginActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        })
     }
 
     private fun postRegistration() {
@@ -64,10 +70,7 @@ class SignUpActivity : AppCompatActivity() {
                 toast("Please Try Again")
             }
 
-            override fun onResponse(
-                call: Call<RegistrationModel>,
-                response: Response<RegistrationModel>
-            ) {
+            override fun onResponse(call: Call<RegistrationModel>, response: Response<RegistrationModel>) {
                 if (response.isSuccessful) {
                     dialog.hideDialog()
                     if (response.body()?.status.equals("200")) {

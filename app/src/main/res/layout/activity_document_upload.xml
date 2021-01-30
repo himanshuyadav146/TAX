@@ -73,7 +73,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="@dimen/fifteen"
             android:layout_marginBottom="@dimen/ten"
-            android:background="@drawable/btn_background"
+            android:background="@drawable/bt_uisquare"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/cont"
             android:textAllCaps="false"

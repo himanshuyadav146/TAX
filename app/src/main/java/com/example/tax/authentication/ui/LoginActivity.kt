@@ -1,18 +1,19 @@
 package com.example.tax.authentication.ui
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.util.Pair
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.widget.ViewUtils
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tax.ApiCall.APIClient
 import com.example.tax.DashBoard.DashBoardActivity
 import com.example.tax.Interfaces.API_Interface
 import com.example.tax.R
 import com.example.tax.models.ApiLogin
-import com.example.tax.models.Data
 import com.example.tax.models.LoginModel
 import com.example.tax.utils.AppPreferences
 import com.example.tax.utils.toast
@@ -31,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var appPreferences: AppPreferences
 
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -46,20 +48,26 @@ class LoginActivity : AppCompatActivity() {
                 objApiLogin.EmailAddress=txt_email.text.toString()
                 objApiLogin.Password=txt_pwd.text.toString()
                 postLogin()
-
-//                intent = Intent(applicationContext, DashBoardActivity::class.java)
-//                toast("Successfully Login")
-//                startActivity(intent)
-//                finish()
             }
 
         })
 
-        tv_not_register.setOnClickListener(View.OnClickListener {
-            intent = Intent(applicationContext, SignUpActivity::class.java)
-            startActivity(intent)
-            finish()
+        btRegister.setOnClickListener(View.OnClickListener {
+            val a = Intent(this, SignUpActivity::class.java)
+//            val pairs: Array<Pair<*, *>?> = arrayOfNulls(1)
+//            pairs[0] = Pair<View, String>(tvLogin, "login")
+//            val activityOptions = ActivityOptions.makeSceneTransitionAnimation(this)
+
+            val p1 = Pair.create<View, String>(tvLogin, "login")
+            val activityOptions=ActivityOptions.makeSceneTransitionAnimation(this, p1)
+            startActivity(a, activityOptions.toBundle())
         })
+
+//        tv_not_register.setOnClickListener(View.OnClickListener {
+//            intent = Intent(applicationContext, SignUpActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        })
 
     }
 

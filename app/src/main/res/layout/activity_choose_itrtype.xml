@@ -8,47 +8,47 @@
     tools:context=".ITRProcess.ChooseITRTypeActivity">
 
 
-    <include layout="@layout/app_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/toolbar"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/cont_button"
-        android:id="@+id/recycler_view_list"
-        android:layout_marginTop="8dp"
         android:paddingLeft="@dimen/twenty"
-        android:paddingRight="@dimen/twenty"
         android:paddingTop="8dp"
+        android:paddingRight="@dimen/twenty"
         android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cont_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
-        android:text="Next"
+        android:id="@+id/cont_button"
         android:layout_width="200dp"
         android:layout_height="@dimen/forty"
-        android:id="@+id/cont_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="@dimen/fifteen"
+        android:layout_marginRight="@dimen/fifteen"
+        android:layout_marginBottom="@dimen/ten"
+        android:background="@drawable/bt_uisquare"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Next"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
-        android:background="@drawable/btn_background"
-        android:fontFamily="@font/roboto_medium"
         android:textSize="@dimen/text_size_fourteen"
-        android:layout_marginBottom="@dimen/ten"
-        android:layout_marginLeft="@dimen/fifteen"
-        android:layout_marginRight="@dimen/fifteen"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

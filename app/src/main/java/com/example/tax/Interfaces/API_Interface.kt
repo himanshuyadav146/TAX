@@ -1,9 +1,6 @@
 package com.example.tax.Interfaces
 
-import com.example.tax.models.ApiLogin
-import com.example.tax.models.Data
-import com.example.tax.models.LoginModel
-import com.example.tax.models.RegistrationModel
+import com.example.tax.models.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -18,6 +15,18 @@ interface API_Interface {
 
     @POST("api/v1/registration")
     fun postRegistration(@Body objApiLogin : ApiLogin): Call<RegistrationModel>
+
+    @POST("api/v1/create-order")
+    fun postInformation(@Body itrBase:ItrBaseModel):Call<ItrBaseModel>
+
+    @POST("api/v1/create-order")
+    fun postInformation(@Body data:Data):Call<ItrBaseModel>
+
+    @POST("api/v1/get-detials")
+    fun getInformation(@Body data:ItrBaseModel):Call<ItrBaseModel>
+
+
+
 
     @Headers("Content-Type:multipart/form-data")
     @Multipart
