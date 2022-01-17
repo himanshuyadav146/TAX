@@ -6,4 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".payment.PaymentActivity">
 
+
+    <include
+        android:layout_width="0dp"
+        android:layout_height="@dimen/fifty"
+        layout="@layout/app_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/toolbar"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_btnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/pay_button"
+            android:layout_width="200dp"
+            android:layout_height="@dimen/forty"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/fifteen"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/fifteen"
+            android:layout_marginBottom="@dimen/ten"
+            android:background="@drawable/bt_uisquare"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/pay_now"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_fourteen" />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

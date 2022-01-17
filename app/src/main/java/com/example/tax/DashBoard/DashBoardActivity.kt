@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.tax.ITRProcess.ChooseITRTypeActivity
+import com.example.tax.ITRProcess.ITRListActivity
 import com.example.tax.R
 import com.example.tax.authentication.ui.SignUpActivity
 import com.example.tax.utils.toast
@@ -20,6 +21,7 @@ class DashBoardActivity : AppCompatActivity() {
        // toolbar_title.text = "Choose Service"
         card_itr.setOnClickListener(View.OnClickListener {
             intent = Intent(applicationContext, ChooseITRTypeActivity::class.java)
+//            intent = Intent(applicationContext, ITRListActivity::class.java)
             startActivity(intent)
 
         })

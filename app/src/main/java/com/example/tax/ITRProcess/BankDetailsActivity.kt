@@ -1,156 +1,235 @@
 package com.example.tax.ITRProcess
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.Toast
+import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tax.ApiCall.APIClient
 import com.example.tax.Interfaces.API_Interface
+import com.example.tax.Interfaces.OnBankItemClick
 import com.example.tax.R
-import com.example.tax.models.ApiLogin
+import com.example.tax.adapters.BankListAdapter
+import com.example.tax.base.BaseActivity
+import com.example.tax.models.*
+import com.example.tax.payment.PaymentActivity
+import com.example.tax.utils.AppPreferences
+import com.example.tax.utils.Constant
+import com.example.tax.utils.toast
+import com.google.gson.Gson
 import dell.com.allindiaitr.utils.AlertDialogueManager
+import dell.com.allindiaitr.utils.ConnectionDetector
+import dell.com.allindiaitr.utils.Validation
 import kotlinx.android.synthetic.main.activity_bank_details.*
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import kotlinx.android.synthetic.main.activity_bank_details.cont_button
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
-import java.lang.Exception
 
-class BankDetailsActivity : AppCompatActivity() {
-
+class BankDetailsActivity : BaseActivity() ,OnBankItemClick {
     var objApiLogin = ApiLogin.instance
-    var mContext:Context=this
+    var itrBaseModel = ItrBaseModel.instance
+    var mContext: Context = this
+//    var data: Data = Data()
     lateinit var apI_Interface: API_Interface
-
+    lateinit var onBankItemClick: OnBankItemClick
+    lateinit var appPreferences: AppPreferences
+    lateinit var userID:String
+    lateinit var bankList:List<Data>
+     var accountType= arrayOf<String>("Saving","Current")
+    lateinit var baseItrID:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bank_details)
         apI_Interface = APIClient().getClient().create(API_Interface::class.java)
+        onBankItemClick=this
+        appPreferences=AppPreferences(mContext)
+        baseItrID = intent.getStringExtra("itrid")
 
-        calculate_button.setOnClickListener(View.OnClickListener {
-            setDataIntoModel();
+        if(appPreferences!=null){
+            var gson = Gson()
+//            var mMineUserEntity = gson?.fromJson(appPreferences?.userInfo, LoginModel::class.java)
+////            userID= mMineUserEntity?.data?.uuid.toString()
+//            userID= mMineUserEntity?.data?.id.toString()
+        }
+        cont_button.setOnClickListener(View.OnClickListener {
+            if(bankList.isEmpty()){
+                if (Validation().isTextEmpty(bankNameFeild.text.toString(), bankNameFeild)
+                    && Validation().isTextEmpty(txtIFSC.text.toString(), txtIFSC)
+                    && Validation().isTextEmpty(edit_ac_no.text.toString(), edit_ac_no)){
+                    setDataIntoModel()
+                    if (ConnectionDetector().isConnectingToInternet(mContext))
+                        postBankDetails()
+                    else
+                        toast("Please Check Your Internet Connection")
+                }
+            }else{
+                val intent=Intent(this,PaymentActivity::class.java)
+                intent.putExtra("itrid",baseItrID)
+                startActivity(intent)
+            }
+
+
         })
 
 
+        if (ConnectionDetector().isConnectingToInternet(mContext)){
+            itrBaseModel.setItrId(baseItrID)
+            getBankDetailsByItrId()
+        }
+        else
+            toast("Please Check Your Internet Connection")
+
+    }
+
+    override fun getToolbarTitle(): String? {
+        return "Bank Details"
+    }
+
+    override fun getTagName(): String? {
+        return "ITR"
+    }
+
+    override fun getLayoutResource(): Int {
+        return R.layout.activity_bank_details
     }
 
 
-    private fun setDataIntoModel(){
-        objApiLogin.NameOfYourBank=bankNameFeild.text.toString()
-        objApiLogin.BankAccountNumber=accNumberField.text.toString()
-        objApiLogin.IFSCCode=ifscCodeField.text.toString()
-
-        postData()
-    }
-
-
-    private fun postData(){
-        var dialog = AlertDialogueManager(mContext,"Please Wait")
-
-        val file = File(objApiLogin.Form16Url!!)
-        val mFile = RequestBody.create("*/*".toMediaTypeOrNull(), file)
-        val Form16UrlBody = MultipartBody.Part.createFormData("file", file.name, mFile)
-
-
-
-        val file1 = File(objApiLogin.Form16Url2!!)
-        val mFile1 = RequestBody.create("*/*".toMediaTypeOrNull(), file1)
-        val Form16Url2Body = MultipartBody.Part.createFormData("file", file.name, mFile1)
-
-
-
-        val file2 = File(objApiLogin.PanUrl!!)
-        val mFile2 = RequestBody.create("*/*".toMediaTypeOrNull(), file2)
-        val PanUrlBody = MultipartBody.Part.createFormData("file", file.name, mFile2)
-
-
-
-
-        val file3 = File(objApiLogin.AdhaarUrl!!)
-        val mFile3 = RequestBody.create("*/*".toMediaTypeOrNull(), file3)
-        val AdhaarUrlBody = MultipartBody.Part.createFormData("file", file.name, mFile3)
-
-
-        val file4 = File(objApiLogin.OtherDocUrl!!)
-        val mFile4 = RequestBody.create("*/*".toMediaTypeOrNull(), file4)
-        val OtherDocUrlBody = MultipartBody.Part.createFormData("file", file.name, mFile4)
-
-        val call=apI_Interface.postData(Form16UrlBody,Form16Url2Body,PanUrlBody,AdhaarUrlBody,OtherDocUrlBody,
-//            RequestBody.create("text/plain".toMediaTypeOrNull(), objApiLogin.userId.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "ITRC01"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "Gaurav"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "ratan"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "Srivastava"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "M"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "11/08/1989"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "CABPS0051H"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "Neel Rata Srievastava"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "Gauravratan@gmail.com"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "9716360465"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "1111222233334444"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "Doc"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "1"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "0"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "0"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "0"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "0"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "0"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "150"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "qweqweqw"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "qweqwe"),
-
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "vns"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "1"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "ffff"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "22222"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), objApiLogin.BankAccountNumber.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), objApiLogin.IFSCCode.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "0"),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), objApiLogin.NameOfYourBank.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), "SAving")
-        )
-
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                try {
-                    if (response.isSuccessful) {
-                        if (response.body() != null) {
-                            dialog.hideDialog()
-//                            if (ConnectionDetector().isConnectingToInternet(mContext)){
-//                                getDocumentList()
-//                            }
-//                            else {
-//                                Toast.makeText(mContext, "Please Check Your Internet Connection", Toast.LENGTH_SHORT).show()
-//                            }
-                        }
-                        else {
-                            dialog.hideDialog()
-                        }
-                    } else {
-                        dialog.hideDialog()
-                        Toast.makeText(applicationContext, "problem uploading file", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                catch (e: Exception) {
-                    e.printStackTrace()
-                    dialog.hideDialog()
-                    Toast.makeText(mContext, resources.getString(R.string.error_message), Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+    private fun postBankDetails() {
+        var dialog = AlertDialogueManager(mContext, "Please Wait")
+        val call = apI_Interface.postBankDetails(itrBaseModel)
+        Log.d("TEMP_TAG", "url: " + call.request().url.toString());
+        call.enqueue(object : retrofit2.Callback<ItrBaseModel> {
+            override fun onFailure(call: Call<ItrBaseModel>, t: Throwable) {
                 dialog.hideDialog()
-                Toast.makeText(mContext, resources.getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+                toast("Please Try Again")
+            }
+
+            override fun onResponse(call: Call<ItrBaseModel>, response: Response<ItrBaseModel>) {
+                if (response.isSuccessful) {
+                    dialog.hideDialog()
+                    var gson: Gson = Gson()
+                    var jsonObj: String = gson.toJson(response.body())
+                    response.body()?.getMessage()?.let { toast(it) }
+                    //getInformation()
+                     intent=Intent(applicationContext,PaymentActivity::class.java)
+                    intent.putExtra("itrid",itrBaseModel.getItrId())
+                    startActivity(intent)
+                }
             }
         })
+    }
+
+    private fun getBankDetailsByItrId(){
+        var dialog = AlertDialogueManager(mContext, "Please Wait")
+        val call = apI_Interface.getBankDetailsByItrid(itrBaseModel.getItrId().toString())
+        Log.d("TEMP_TAG", "url: " + call.request().url.toString());
+        call.enqueue(object : retrofit2.Callback<ArrayBaseModel> {
+            override fun onFailure(call: Call<ArrayBaseModel>, t: Throwable) {
+                dialog.hideDialog()
+                toast("Please Try Again")
+            }
+
+            override fun onResponse(call: Call<ArrayBaseModel>, response: Response<ArrayBaseModel>) {
+                if (response.isSuccessful) {
+                    dialog.hideDialog()
+                    var gson: Gson = Gson()
+                    var jsonObj: String = gson.toJson(response.body())
+                    enabledBankList(response.body())
+                }
+            }
+        })
+    }
 
 
+    private fun setDataIntoModel() {
+        itrBaseModel.setBankname(bankNameFeild.text.toString())
+        itrBaseModel.setIfsccode(txtIFSC.text.toString())
+        itrBaseModel.setAccountno(edit_ac_no.text.toString())
+        itrBaseModel.setAccounttype(accountType.get(0))
+//        itrBaseModel.userid = userID
+        itrBaseModel.userid = "50"
+    }
+
+    private fun setDataInToField(body: ArrayBaseModel?) {
+        var temp = body?.data?.get(0)
+        bankNameFeild.setText(temp?.bankname.toString())
+        txtIFSC.setText(temp?.ifsccode.toString())
+        edit_ac_no.setText(temp?.accountno.toString())
+    }
+
+    private fun enabledBankList(body: ArrayBaseModel?){
+        recycle_bank_list.setHasFixedSize(true)
+        bankList = body?.data as List<Data>
+        recycle_bank_list.layoutManager = LinearLayoutManager(mContext)
+        recycle_bank_list.adapter =
+            BankListAdapter(this@BankDetailsActivity,
+                bankList, onBankItemClick
+            )
+        llBankDetails.visibility = View.GONE
+        recycle_bank_list.visibility=View.VISIBLE
     }
 
 
 
+
+    override fun onClick(bankDetails: BankDetail) {
+        bankNameFeild.setText(bankDetails.getBankName().toString())
+        txtIFSC.setText(bankDetails.getIfscCode().toString())
+        edit_ac_no.setText(bankDetails.getAccountNumber().toString())
+        val adapter: ArrayAdapter<*> = ArrayAdapter<Any?>(this, android.R.layout.simple_spinner_item, accountType)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        acc_type_spinner.adapter=adapter
+        llBankDetails.visibility=View.VISIBLE
+        recycle_bank_list.visibility=View.GONE
+       // Toast.makeText(mContext,"Hello",Toast.LENGTH_LONG).show()
+    }
+
+    override fun deleteItems(bankDetails: BankDetail) {
+        itrBaseModel.setBankDetailId(bankDetails.getUuid().toString())
+//        itrBaseModel.setUserId(bankDetails.getUserId())
+        deleteBank()
+    }
+
+    private fun deleteBank(){
+        itrBaseModel.setType(Constant.SCREEN_TYPE_BI)
+        var dialog = AlertDialogueManager(mContext, "Please Wait")
+        val call = apI_Interface.deleteBank(itrBaseModel)
+        Log.d("TEMP_TAG", "url: " + call.request().url.toString());
+        call.enqueue(object : retrofit2.Callback<ModelbankList> {
+            override fun onFailure(call: Call<ModelbankList>, t: Throwable) {
+                dialog.hideDialog()
+                toast("Please Try Again")
+            }
+
+            override fun onResponse(call: Call<ModelbankList>, response: Response<ModelbankList>) {
+                if (response.isSuccessful) {
+                    dialog.hideDialog()
+                    var gson: Gson = Gson()
+                    var jsonObj: String = gson.toJson(response.body())
+//                    getInformation()
+//                    itrBaseModel.setData(response.body()?.getData())
+//
+////                    llBankDetails
+//                    val bankList:List<BankDetail> = response.body()?.getData()?.getBankDetail() as List<BankDetail>
+//                    if(bankList.isEmpty()){
+//                        llBankDetails.visibility=View.VISIBLE
+//                        recycle_bank_list.visibility=View.GONE
+//                    }else{
+//                        recycle_bank_list.setHasFixedSize(true)
+//                        recycle_bank_list.layoutManager = LinearLayoutManager(mContext)
+//                        recycle_bank_list.adapter =
+//                            BankListAdapter(this@BankDetailsActivity,
+//                                response.body()?.getData()?.getBankDetail() as List<BankDetail>,onBankItemClick
+//                            )
+//                        llBankDetails.visibility=View.GONE
+//                        recycle_bank_list.visibility=View.VISIBLE
+//                    }
+
+                }
+            }
+
+        })
+    }
 }

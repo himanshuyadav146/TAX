@@ -15,17 +15,21 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ITRProcess.AddressDetailsActivity"/>
+        <activity android:name=".payment.PaymentActivity"></activity>
+        <activity android:name=".ITRProcess.ITRListActivity" />
+        <activity android:name=".ITRProcess.AddressDetailsActivity" />
         <activity android:name=".ITRProcess.OtherSourceIncomeActivity" />
         <activity android:name=".ITRProcess.BankDetailsActivity" />
         <activity android:name=".ITRProcess.DocumentUploadActivity" />
-        <activity android:name=".ITRProcess.PersionalInformationActivity"
+        <activity
+            android:name=".ITRProcess.PersionalInformationActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ITRProcess.ChooseITRTypeActivity" />
         <activity android:name=".authentication.ui.LoginActivity" />
         <activity android:name=".authentication.ui.SignUpActivity" />

@@ -85,18 +85,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="cycle_animation.json"
+            app:lottie_fileName="login-success.json"
             app:lottie_loop="true"
             app:lottie_speed="1.25" />
 
     </LinearLayout>
-
-
-
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

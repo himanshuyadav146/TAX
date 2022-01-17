@@ -43,7 +43,6 @@
                     android:text="@string/other_income_int_inc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/ten"
                     android:fontFamily="@font/roboto_light"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_fourteen"/>

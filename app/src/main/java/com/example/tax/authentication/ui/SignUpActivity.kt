@@ -8,17 +8,13 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.example.tax.ApiCall.APIClient
-import com.example.tax.DashBoard.DashBoardActivity
 import com.example.tax.Interfaces.API_Interface
 import com.example.tax.R
 import com.example.tax.models.ApiLogin
-import com.example.tax.models.LoginModel
 import com.example.tax.models.RegistrationModel
 import com.example.tax.utils.AppPreferences
 import com.example.tax.utils.toast
-import com.google.gson.Gson
 import dell.com.allindiaitr.utils.AlertDialogueManager
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.txt_email
 import kotlinx.android.synthetic.main.activity_sign_up.txt_pwd
@@ -46,11 +42,13 @@ class SignUpActivity : AppCompatActivity() {
             if (txt_email.text.isNullOrEmpty() && txt_pwd.text.isNullOrEmpty() && txt_mob.text.isNullOrEmpty()) {
                 toast("Please Enter Mandatory Fields")
             } else {
-                objApiLogin.EmailAddress = txt_email.text.toString()
-                objApiLogin.MobileNumber = txt_mob.text.toString()
-                objApiLogin.Password = txt_pwd.text.toString()
-                objApiLogin.DeviceType = "Android"
-                postRegistration()
+                var objReg=RegistrationModel()
+                objReg.email = txt_email.text.toString()
+                objReg.name=txt_name.text.toString()
+                objReg.phoneno = txt_mob.text.toString()
+                objReg.password = txt_pwd.text.toString()
+                objReg.platform="Android"
+                postRegistration(objReg)
             }
         })
 
@@ -61,9 +59,9 @@ class SignUpActivity : AppCompatActivity() {
 //        })
     }
 
-    private fun postRegistration() {
+    private fun postRegistration(objReg: RegistrationModel) {
         var dialog = AlertDialogueManager(mContext, "Please Wait")
-        val call = apI_Interface.postRegistration(objApiLogin)
+        val call = apI_Interface.postRegistration(objReg)
         call.enqueue(object : Callback<RegistrationModel> {
             override fun onFailure(call: Call<RegistrationModel>, t: Throwable) {
                 dialog.hideDialog()
@@ -73,12 +71,14 @@ class SignUpActivity : AppCompatActivity() {
             override fun onResponse(call: Call<RegistrationModel>, response: Response<RegistrationModel>) {
                 if (response.isSuccessful) {
                     dialog.hideDialog()
-                    if (response.body()?.status.equals("200")) {
+                    if (response.body()?.status.equals("ok")) {
                         toast(response.body()?.message.toString())
                         intent = Intent(applicationContext, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
                     }
+                }else{
+                    toast("Fails")
                 }
             }
         })

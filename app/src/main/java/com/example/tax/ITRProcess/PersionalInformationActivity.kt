@@ -2,30 +2,23 @@ package com.example.tax.ITRProcess
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import com.example.tax.ApiCall.APIClient
-import com.example.tax.DashBoard.DashBoardActivity
 import com.example.tax.Interfaces.API_Interface
 import com.example.tax.R
-import com.example.tax.authentication.ui.SignUpActivity
 import com.example.tax.base.BaseActivity
-import com.example.tax.models.ApiLogin
-import com.example.tax.models.Data
-import com.example.tax.models.ItrBaseModel
-import com.example.tax.models.LoginModel
+import com.example.tax.models.*
 import com.example.tax.utils.AppPreferences
+import com.example.tax.utils.Constant
 import com.example.tax.utils.toast
 import com.google.gson.Gson
 import dell.com.allindiaitr.utils.AlertDialogueManager
 import dell.com.allindiaitr.utils.ConnectionDetector
 import dell.com.allindiaitr.utils.Validation
 import kotlinx.android.synthetic.main.activity_persional_information.*
-import okhttp3.Callback
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 
@@ -42,10 +35,9 @@ class PersionalInformationActivity : BaseActivity() {
         appPreferences=AppPreferences(mContext)
         if (!TextUtils.isEmpty(appPreferences.userInfo)) {
             var gson = Gson()
-            var mMineUserEntity = gson?.fromJson(appPreferences?.userInfo, LoginModel::class.java)
-            itrBaseModel.setUserId(mMineUserEntity.data?.uuid)
-//            itrBaseModel.setItrId("")
-           // itrBaseModel.setItrId(mMineUserEntity.data?.uuid)
+            var mMineUserEntity = gson?.fromJson(appPreferences?.userInfo, UserInformation::class.java)
+//            itrBaseModel.setUserId(mMineUserEntity.id.toString())
+            itrBaseModel.userid=mMineUserEntity.id.toString()
         }
         cont_button.setOnClickListener(View.OnClickListener {
             if(Validation().isNameValid(editFName.text.toString(),editFName,"Please Enter First Name")
@@ -56,7 +48,6 @@ class PersionalInformationActivity : BaseActivity() {
                 && Validation().isPanValid(editPAN.text.toString(),editPAN,"Enter your pan number")
                 && Validation().isAadhaarValid(editAadhar.text.toString(),editAadhar, "Enter your Aadhaar card")
             ){
-
                 setDataIntoModel()
                 if (ConnectionDetector().isConnectingToInternet(mContext))
                 postPersonalInfo()
@@ -65,7 +56,8 @@ class PersionalInformationActivity : BaseActivity() {
             }
         })
 
-        setDataInToField()
+//        setDataInToField()
+        getPersonalInfo("41")
     }
 
     override fun getToolbarTitle(): String? {
@@ -81,52 +73,78 @@ class PersionalInformationActivity : BaseActivity() {
     }
 
     private fun setDataIntoModel(){
-        itrBaseModel.setType("PD");
-        itrBaseModel.setFinancialYear("2020-2022")
-        itrBaseModel.setFirstName(editFName.text.toString())
-        itrBaseModel.setMiddleName(editMName.text.toString())
-        itrBaseModel.setLastName(editLName.text.toString())
-        itrBaseModel.setEmail(editEmail.text.toString())
-        itrBaseModel.setAadharCardNumber(editAadhar.text.toString())
-        itrBaseModel.setMobileNumber(editMobile.text.toString())
-        itrBaseModel.setDOB(editDOB.text.toString())
-        itrBaseModel.setPanNumber(editPAN.text.toString())
+        itrBaseModel.financialyear="2020-2021"
+        itrBaseModel.firstname=editFName.text.toString()
+        itrBaseModel.lastname=editLName.text.toString()
+        itrBaseModel.mobileno=editMobile.text.toString()
+        itrBaseModel.dob=editDOB.text.toString()
+        itrBaseModel.emailid=editEmail.text.toString()
+        itrBaseModel.panno=editPAN.text.toString()
+        itrBaseModel.aadharno=editAadhar.text.toString()
+      //  itrBaseModel.userid="123"
+        itrBaseModel.sourceofincome="sallary"
     }
 
-    private fun setDataInToField(){
+    private fun setDataInToField(body: ItrBaseModel?) {
         if (itrBaseModel!=null){
-            if(itrBaseModel.getData()!=null){
-                val data:Data=itrBaseModel.getData()!!
-                editFName.setText(data.getFirstName().toString())
-                editMName.setText(data.getMiddleName().toString())
-                editLName.setText(data.getLastName().toString())
-                editEmail.setText(data.getEmail().toString())
-                editAadhar.setText(data.getAadharCardNumber().toString())
-                editMobile.setText(data.mobileNumber.toString())
-                editDOB.setText(data.getDOB().toString())
-                editPAN.setText(data.getPanNumber().toString())
+                editFName.setText(itrBaseModel.firstname)
+                editMName.setText(itrBaseModel.getMiddleName().toString())
+                editLName.setText(itrBaseModel.lastname)
+                editEmail.setText(itrBaseModel.emailid)
+                editAadhar.setText(itrBaseModel.aadharno)
+                editMobile.setText(itrBaseModel.mobileno)
+                editDOB.setText(itrBaseModel.dob)
+                editPAN.setText(itrBaseModel.panno)
 
-            }
         }
     }
 
     private fun postPersonalInfo(){
-        var dialog = AlertDialogueManager(mContext,"Please Wait")
-        val call = apI_Interface.postInformation(itrBaseModel)
+        var dialog = AlertDialogueManager(mContext,Constant.PLEASE_WAIT)
+        val call = apI_Interface.postPreInformation(itrBaseModel)
         Log.d("TEMP_TAG", "url: " + call.request().url.toString());
         call.enqueue(object : retrofit2.Callback<ItrBaseModel> {
             override fun onFailure(call: Call<ItrBaseModel>, t: Throwable) {
                 dialog.hideDialog()
-                toast("Please Try Again")
+                toast(Constant.PLEASE_TRY_AGAIN)
             }
             override fun onResponse(call: Call<ItrBaseModel>, response: Response<ItrBaseModel>) {
-                if(response.isSuccessful){
-                    dialog.hideDialog()
+                dialog.hideDialog()
+                if(response.isSuccessful && !response.body()?.status.equals("failed")){
                     var gson: Gson = Gson()
                     var jsonObj:String=gson.toJson(response.body())
-                    itrBaseModel.setData(response.body()?.getData())
+                    itrBaseModel= response.body()!!
+                    itrBaseModel.setItrId(response.body()?.id.toString())
                     intent = Intent(applicationContext, AddressDetailsActivity::class.java)
+                    intent.putExtra("itrid",itrBaseModel.getItrId())
                     startActivity(intent)
+                }else{
+                    toast("Something went wrong!")
+                }
+            }
+
+        })
+    }
+
+
+    private fun getPersonalInfo(id:String){
+        var dialog = AlertDialogueManager(mContext,Constant.PLEASE_WAIT)
+        val call = apI_Interface.getPersonlinfo(id)
+        call.enqueue(object : retrofit2.Callback<ItrBaseModel> {
+            override fun onFailure(call: Call<ItrBaseModel>, t: Throwable) {
+                dialog.hideDialog()
+                toast(Constant.PLEASE_TRY_AGAIN)
+            }
+            override fun onResponse(call: Call<ItrBaseModel>, response: Response<ItrBaseModel>) {
+                dialog.hideDialog()
+                if(response.isSuccessful && !response.body()?.status.equals("failed")){
+                    var gson: Gson = Gson()
+                    var jsonObj:String=gson.toJson(response.body())
+                    itrBaseModel = response.body()!!
+                    itrBaseModel.setItrId(response.body()?.id.toString())
+                    setDataInToField(itrBaseModel)
+                }else{
+                    toast("Something went wrong!")
                 }
             }
 

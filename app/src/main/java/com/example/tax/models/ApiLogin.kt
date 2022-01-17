@@ -236,6 +236,17 @@ class ApiLogin : Serializable{
 
 
 
+    //////////////////////////// New Model Implementation ////////////////
+
+    @SerializedName("name")
+    @Expose
+    var name: String? = null
+
+
+
+
+
+    //////////////////////////// New Model Implementation ////////////////
 
 
 

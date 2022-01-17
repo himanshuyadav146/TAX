@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.tax.R
 import com.example.tax.authentication.ui.LoginActivity
+import com.example.tax.authentication.ui.SignUpActivity
 import com.example.tax.utils.AppPreferences
 
 class SplashActivity : AppCompatActivity() {
@@ -20,8 +21,8 @@ class SplashActivity : AppCompatActivity() {
     internal val mRunnable: Runnable = Runnable {
 
         if (appPreferences?.userInfo.isNullOrEmpty()) {
-
             val intent = Intent(applicationContext, LoginActivity::class.java)
+//            val intent = Intent(applicationContext, SignUpActivity::class.java)
             startActivity(intent)
             finish()
         }else{

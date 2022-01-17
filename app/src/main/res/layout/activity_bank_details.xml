@@ -5,186 +5,184 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ITRProcess.BankDetailsActivity">
-
-    <Button
+    <include
         android:layout_width="0dp"
-        android:layout_height="@dimen/forty"
-        android:id="@+id/calculate_button"
+        android:layout_height="@dimen/fifty"
+        layout="@layout/app_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/fifteen"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/fifteen"
-        android:layout_marginBottom="@dimen/ten"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_fourteen"
-        android:text="@string/submit" android:layout_marginTop="@dimen/ten"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout21"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="1.0"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fifteen"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="@dimen/thirty"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/thirty"
-        android:id="@+id/linearLayout15">
-
-        <TextView
-            android:text="@string/bank_details_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView30"
-            android:layout_marginTop="@dimen/five"
-            android:textColor="@color/lighter_black"
-            android:textSize="@dimen/text_size_twelve"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/forty"
-            android:inputType="textCapCharacters"
-            android:ems="10"
-            android:id="@+id/bankNameFeild"
-            android:textSize="@dimen/text_size_twelve"
-            android:background="@drawable/text_field"
-            android:padding="@dimen/twelve"
-            android:textColor="@color/lighter_black"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/toolbar"/>
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/thirty"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout15"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/rl_btnContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/thirty"
-        android:id="@+id/linearLayout16">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginTop="@dimen/five"
+        android:fillViewport="true">
 
-        <TextView
-            android:text="@string/bank_details_ifsc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView31"
-            android:layout_marginTop="@dimen/five"
-            android:textColor="@color/lighter_black"
-            android:textSize="@dimen/text_size_twelve"/>
-
-        <EditText
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/ten"
+            android:layout_marginRight="@dimen/ten"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:id="@+id/llProfileContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/llBankDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:text="@string/bank_details_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_fourteen"/>
+
+                    <EditText
+                        android:id="@+id/bankNameFeild"
+                        android:ems="10"
+                        android:padding="@dimen/twelve"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/text_border"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/roboto"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/light_black"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:inputType="textCapCharacters"
+                        />
+
+
+                    <TextView
+                        android:text="@string/bank_details_ifsc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:layout_marginTop="@dimen/five"/>
+
+                    <EditText
+                        android:id="@+id/txtIFSC"
+                        android:ems="10"
+                        android:padding="@dimen/twelve"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/text_border"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/roboto"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/light_black"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:inputType="textCapCharacters"
+                        />
+
+
+                    <TextView
+                        android:text="@string/bank_details_acc_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:layout_marginTop="@dimen/five"/>
+
+                    <EditText
+                        android:id="@+id/edit_ac_no"
+                        android:ems="10"
+                        android:padding="@dimen/twelve"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/text_border"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/roboto"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/light_black"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:inputType="number"
+                        />
+
+
+                    <TextView
+                        android:text="@string/bank_details_acc_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_fourteen"
+                        android:layout_marginTop="@dimen/five"/>
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/forty"
+                        android:id="@+id/acc_type_spinner"
+                        android:padding="@dimen/five"/>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle_bank_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/five"
+                    />
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </ScrollView>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_btnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/cont_button"
+            android:layout_width="200dp"
             android:layout_height="@dimen/forty"
-            android:inputType="textCapCharacters"
-            android:ems="10"
-            android:id="@+id/ifscCodeField"
-            android:background="@drawable/text_field"
-            android:textColor="@color/lighter_black"
-            android:textSize="@dimen/text_size_twelve"
-            android:padding="@dimen/twelve"
-            android:maxLength="11"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/thirty"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/thirty"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout16"
-        android:id="@+id/linearLayout17">
-
-        <TextView
-            android:text="@string/bank_details_acc_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/five"
-            android:textColor="@color/lighter_black"
-            android:textSize="@dimen/text_size_twelve"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/forty"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/accNumberField"
-            android:background="@drawable/text_field"
-            android:textColor="@color/lighter_black"
-            android:textSize="@dimen/text_size_twelve"
-            android:padding="@dimen/twelve"
-            android:maxLength="16"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout17"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/thirty"
-        android:layout_marginEnd="@dimen/thirty"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/linearLayout20">
-
-        <TextView
-            android:text="@string/bank_details_acc_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView32"
-            android:layout_marginTop="@dimen/five"
-            android:textColor="@color/lighter_black"
-            android:textSize="@dimen/text_size_twelve"/>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/forty"
-            android:id="@+id/acc_type_spinner"
-            android:padding="@dimen/five"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="@dimen/fifteen"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout20"
-        android:layout_marginEnd="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical" android:id="@+id/linearLayout21"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="15dp">
-
-        <CheckBox
-            android:text="@string/bank_details_make_primary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/primaryCheckBox"
-            android:textColor="@color/lighter_black"
-            android:textSize="@dimen/text_size_fourteen"/>
-
-        <TextView
-            android:text="@string/bank_details_make_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView33"
-            android:textSize="@dimen/text_size_twelve"
-            android:layout_marginTop="-10dp"
-            android:layout_marginLeft="@dimen/thirty"/>
-
-    </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/fifteen"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="@dimen/fifteen"
+            android:layout_marginBottom="@dimen/ten"
+            android:background="@drawable/bt_uisquare"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/cont"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_fourteen" />
+    </RelativeLayout>
 
 
 

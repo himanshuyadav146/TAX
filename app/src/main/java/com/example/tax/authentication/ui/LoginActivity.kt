@@ -15,7 +15,9 @@ import com.example.tax.Interfaces.API_Interface
 import com.example.tax.R
 import com.example.tax.models.ApiLogin
 import com.example.tax.models.LoginModel
+import com.example.tax.models.RegistrationModel
 import com.example.tax.utils.AppPreferences
+import com.example.tax.utils.Constant
 import com.example.tax.utils.toast
 import com.google.gson.Gson
 import dell.com.allindiaitr.utils.AlertDialogueManager
@@ -45,9 +47,11 @@ class LoginActivity : AppCompatActivity() {
             if(txt_email.text.isNullOrEmpty() && txt_pwd.text.isNullOrEmpty()){
                 toast("Please Enter Mandatory Fields")
             }else{
-                objApiLogin.EmailAddress=txt_email.text.toString()
-                objApiLogin.Password=txt_pwd.text.toString()
-                postLogin()
+                var objReg= RegistrationModel()
+                objReg.email=txt_email.text.toString()
+                objReg.password=txt_pwd.text.toString()
+                objReg.platform=Constant.PLATFORM
+                postLogin(objReg)
             }
 
         })
@@ -73,26 +77,32 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    private fun postLogin() {
+    private fun postLogin(objReg: RegistrationModel) {
 
         var dialog = AlertDialogueManager(mContext,"Please Wait")
 
-        val call = apI_Interface.postLogin(objApiLogin)
-        call.enqueue(object : Callback<LoginModel>{
-            override fun onFailure(call: Call<LoginModel>, t: Throwable) {
+        val call = apI_Interface.postLogin(objReg)
+        call.enqueue(object : Callback<RegistrationModel>{
+            override fun onFailure(call: Call<RegistrationModel>, t: Throwable) {
                 dialog.hideDialog()
                 toast("Please Try Again")
             }
-            override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
+            override fun onResponse(call: Call<RegistrationModel>, response: Response<RegistrationModel>) {
                 if(response.isSuccessful){
-                    dialog.hideDialog()
-                    var gson:Gson= Gson()
-                    var jsonObj:String=gson.toJson(response.body())
-                    appPreferences.userInfo=jsonObj
-                    intent = Intent(applicationContext, DashBoardActivity::class.java)
-                    toast("Successfully Login")
-                    startActivity(intent)
-                    finish()
+                    if(response.body()?.status.equals("failed")){
+                        dialog.hideDialog()
+                        toast("Failed to Login")
+                    }else{
+                        dialog.hideDialog()
+                        var gson:Gson= Gson()
+                        var jsonObj:String=gson.toJson(response.body())
+                        appPreferences.userInfo=jsonObj
+                        intent = Intent(applicationContext, DashBoardActivity::class.java)
+                        toast("Successfully Login")
+                        startActivity(intent)
+                        finish()
+                    }
+
                 }
             }
 

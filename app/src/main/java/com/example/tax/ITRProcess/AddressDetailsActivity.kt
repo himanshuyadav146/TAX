@@ -13,6 +13,7 @@ import com.example.tax.R
 import com.example.tax.base.BaseActivity
 import com.example.tax.models.Data
 import com.example.tax.models.ItrBaseModel
+import com.example.tax.utils.Constant
 import com.example.tax.utils.toast
 import com.google.gson.Gson
 import dell.com.allindiaitr.utils.AlertDialogueManager
@@ -27,15 +28,15 @@ import retrofit2.Response
 class AddressDetailsActivity : BaseActivity() {
     var itrBaseModel = ItrBaseModel.instance
     var mContext: Context = this
-    var data: Data = Data()
     lateinit var apI_Interface: API_Interface
+    lateinit var baseItrID:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         apI_Interface = APIClient().getClient().create(API_Interface::class.java)
+        baseItrID = intent.getStringExtra("itrid")
 //        editCountry.setEnabled(false)
         cont_button.setOnClickListener(View.OnClickListener {
-
             if (Validation().isTextEmpty(editBlockNo.text.toString(), editBlockNo)
                 && Validation().isTextEmpty(editBuildingNo.text.toString(), editBuildingNo)
                 && Validation().isTextEmpty(editRoad.text.toString(), editRoad)
@@ -46,16 +47,19 @@ class AddressDetailsActivity : BaseActivity() {
                 && Validation().isPinValid(editPin.text.toString(), editPin)
             ) {
                 setDataIntoModel()
-                if (ConnectionDetector().isConnectingToInternet(mContext))
+                if (ConnectionDetector().isConnectingToInternet(mContext)){
                     postAddressDetails()
+                }
                 else
                     toast("Please Check Your Internet Connection")
             }
 
         })
 
-        if (ConnectionDetector().isConnectingToInternet(mContext))
-            getInformation()
+        if (ConnectionDetector().isConnectingToInternet(mContext)){
+            itrBaseModel.setItrId(baseItrID)
+            getAddressByItrid()
+        }
         else
             toast("Please Check Your Internet Connection")
     }
@@ -75,7 +79,7 @@ class AddressDetailsActivity : BaseActivity() {
 
     private fun postAddressDetails() {
         var dialog = AlertDialogueManager(mContext, "Please Wait")
-        val call = apI_Interface.postInformation(data)
+        val call = apI_Interface.postAddressInfo(itrBaseModel)
         Log.d("TEMP_TAG", "url: " + call.request().url.toString());
         call.enqueue(object : retrofit2.Callback<ItrBaseModel> {
             override fun onFailure(call: Call<ItrBaseModel>, t: Throwable) {
@@ -88,8 +92,10 @@ class AddressDetailsActivity : BaseActivity() {
                     dialog.hideDialog()
                     var gson: Gson = Gson()
                     var jsonObj: String = gson.toJson(response.body())
-                    response.body()?.getMessage()?.let { toast(it) }
+                    itrBaseModel = response.body()!!
+                    itrBaseModel.setItrId(response.body()?.id.toString())
                     intent = Intent(applicationContext, DocumentUploadActivity::class.java)
+                    intent.putExtra("itrid",itrBaseModel.getItrId())
                     startActivity(intent)
                 }
             }
@@ -97,11 +103,9 @@ class AddressDetailsActivity : BaseActivity() {
     }
 
 
-    private fun getInformation() {
-        itrBaseModel.setType("AD")
-        itrBaseModel.setItrId("71387885-5d8a-11eb-8bb6-525400f438a7")
+    private fun getAddressByItrid() {
         var dialog = AlertDialogueManager(mContext, "Please Wait")
-        val call = apI_Interface.getInformation(itrBaseModel)
+        val call = apI_Interface.getAddressByItrid(itrBaseModel.getItrId().toString())
         Log.d("TEMP_TAG", "url: " + call.request().url.toString());
         call.enqueue(object : retrofit2.Callback<ItrBaseModel> {
             override fun onFailure(call: Call<ItrBaseModel>, t: Throwable) {
@@ -114,7 +118,8 @@ class AddressDetailsActivity : BaseActivity() {
                     dialog.hideDialog()
                     var gson: Gson = Gson()
                     var jsonObj: String = gson.toJson(response.body())
-                    itrBaseModel.setData(response.body()?.getData())
+//                    itrBaseModel.setData(response.body()?.getData())
+                    itrBaseModel = response.body()!!
                     setDataInToField()
                 }
             }
@@ -123,28 +128,25 @@ class AddressDetailsActivity : BaseActivity() {
     }
 
     private fun setDataIntoModel() {
-        data.setType("AD");
-//        data.setItrId(itrBaseModel.getData()?.uuid)
-        data.setItrId("71387885-5d8a-11eb-8bb6-525400f438a7")
-        data.setBlockNo(editBlockNo.text.toString())
-        data.setBuilding(editBuildingNo.text.toString())
-        data.setRoad(editRoad.text.toString())
-        data.setLocality(editArea.text.toString())
-        data.setCountry(editCountry.text.toString())
-        data.setState(editState.text.toString())
-        data.setTown(editCity.text.toString())
-        data.setPincode(editPin.text.toString())
+        itrBaseModel.setBlockNo(editBlockNo.text.toString())
+        itrBaseModel.setBuilding(editBuildingNo.text.toString())
+        itrBaseModel.setRoad(editRoad.text.toString())
+        itrBaseModel.setLocality(editArea.text.toString())
+        itrBaseModel.setCountry(editCountry.text.toString())
+        itrBaseModel.setState(editState.text.toString())
+        itrBaseModel.setTown(editCity.text.toString())
+        itrBaseModel.setPincode(editPin.text.toString())
     }
 
     private fun setDataInToField() {
-        editBlockNo.setText(itrBaseModel.getData()?.getBlockNo())
-        editBuildingNo.setText(itrBaseModel.getData()?.getBuilding())
-        editRoad.setText(itrBaseModel.getData()?.getRoad())
-        editArea.setText(itrBaseModel.getData()?.getLocality())
-        editState.setText(itrBaseModel.getData()?.getState())
-        editCity.setText(itrBaseModel.getData()?.getTown())
-        editPin.setText(itrBaseModel.getData()?.getPincode())
-        editCountry.setText(itrBaseModel.getData()?.getCountry())
+        editBlockNo.setText(itrBaseModel.getBlockNo())
+        editBuildingNo.setText(itrBaseModel.getBuilding())
+        editRoad.setText(itrBaseModel.getRoad())
+        editArea.setText(itrBaseModel.getLocality())
+        editState.setText(itrBaseModel.getState())
+        editCity.setText(itrBaseModel.getTown())
+        editPin.setText(itrBaseModel.getPincode())
+        editCountry.setText(itrBaseModel.getCountry())
     }
 
 }
