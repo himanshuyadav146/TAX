@@ -167,5 +167,6 @@
     <string name="review_info">Review Information</string>
     <string name="e_filed">E-Filed</string>
     <string name="e_verify">E-Verify Now</string>
+    <string name="pay_now">Pay Now</string>
 
 </resources>
